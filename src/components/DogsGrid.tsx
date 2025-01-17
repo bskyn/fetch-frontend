@@ -22,7 +22,7 @@ const DogsGrid = ({
       {dogs.map((dog) => (
         <div
           key={dog.id}
-          className="relative border rounded-lg p-2 border-slate-500 cursor-pointer transition-transform duration-200 hover:scale-95 hover:shadow-lg"
+          className="relative border rounded-lg p-2 border-purple-500 cursor-pointer transition-transform duration-200 hover:scale-95 hover:shadow-lg"
           onClick={() => toggleFavorite(dog.id)}
         >
           <div className="absolute top-3 right-3 z-50">
