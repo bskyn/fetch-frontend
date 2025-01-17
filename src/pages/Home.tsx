@@ -10,8 +10,7 @@ import Header from '@/components/Header';
 import useMatch from '@/hooks/useMatchDogs';
 import Modal from '@/components/Modal';
 import FavoriteSelection from '@/components/FavoriteSelection';
-
-const DEFAULT_SIZE = 25;
+import { DEFAULT_SIZE } from '@/constants/pagination.constant';
 
 const Home = () => {
   const [searchParams, setSearchParams] = useState<ISearchParams | null>(null);
@@ -100,7 +99,7 @@ const Home = () => {
     <div className="p-6">
       <Header />
 
-      <div className="flex gap-x-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <SearchBar onSearch={handleSearch} />
         <FavoriteSelection
           favorites={favorites}
