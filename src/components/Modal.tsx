@@ -32,7 +32,11 @@ const Modal = ({
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="mb-1">Your Match</DialogTitle>
+          <DialogTitle className="mb-2">
+            <p className="bg-gradient-to-r from-pink-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+              ⭐ Your Match 🚀
+            </p>
+          </DialogTitle>
           <DialogDescription>
             <div className="w-full aspect-w-4 aspect-h-3 rounded-md overflow-hidden">
               <img
