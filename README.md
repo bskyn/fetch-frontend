@@ -7,7 +7,7 @@ To run the app:
 
 ## Note
 
-Please note do not test in your broweser incognito mode as that prevents cookies stored on the browser and the authenticated endpoint api calls will fail.
+Please note do not test in your broweser incognito mode as that prevents cookies stored on the browser and the authenticated endpoint api calls will fail. Additionally on Safari, it enforces stricter rules for cookies, so it seems you will need to disable "prevent cross-site tracking" in privacy for it to work. I think this can be fixed with a configuration change on the backend with correct attributes for same site and secure on the cookie.
 
 ## Documentation
 
