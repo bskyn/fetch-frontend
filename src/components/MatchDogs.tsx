@@ -5,6 +5,8 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
+import { IDog } from '@/interfaces';
 
 const MatchDogs = ({
   favorites,
@@ -12,7 +14,7 @@ const MatchDogs = ({
   isMatchLoading,
   clearFavorites,
 }: {
-  favorites: string[];
+  favorites: IDog[];
   handleGenerateMatch: () => void;
   isMatchLoading: boolean;
   clearFavorites: () => void;
@@ -24,7 +26,7 @@ const MatchDogs = ({
           <TooltipTrigger
             onClick={handleGenerateMatch}
             className={cn(
-              `text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:bg-grey-500`,
+              `text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:bg-grey-500 w-full`,
               `${favorites.length === 0 ? 'cursor-not-allowed' : ''}`
             )}
             disabled={favorites.length === 0 || isMatchLoading}
@@ -36,12 +38,9 @@ const MatchDogs = ({
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <button
-        className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br active:red-700 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-        onClick={clearFavorites}
-      >
+      <Button className="w-full" type="button" onClick={clearFavorites}>
         Clear Favorites
-      </button>
+      </Button>
     </div>
   );
 };

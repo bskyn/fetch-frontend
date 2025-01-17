@@ -19,9 +19,7 @@ import { SortDirection, SortField } from '@/enum';
 
 type SearchFormValues = z.infer<typeof searchSchema>;
 
-const SearchBar = ({
-  onSearch,
-}: {
+interface SearchBarProps {
   onSearch: (params: {
     breed: string[];
     zipCode: string[];
@@ -29,7 +27,9 @@ const SearchBar = ({
     ageMax: number | '';
     sort: ISort;
   }) => void;
-}) => {
+}
+
+const SearchBar = ({ onSearch }: SearchBarProps) => {
   const { data: breeds } = useFetchDogBreeds();
 
   const options = breeds?.map((breed) => ({
@@ -78,10 +78,10 @@ const SearchBar = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="border-2 rounded-lg p-4 shadow-md border-slate-400"
+      className="border-2 rounded-lg p-4 shadow-md border-slate-400 w-full"
     >
-      <div className="text-lg font-semibold mb-4">
-        ⭐ Find for your fav doggo! ⭐
+      <div className="text-lg font-semibold mb-4 text-slate-400">
+        ⭐ Find your fav doggo! ⭐
       </div>
 
       <div className="flex-1 mb-4">
@@ -203,7 +203,7 @@ const SearchBar = ({
         </div>
       </div>
 
-      <div className="mt-4 flex justify-end">
+      <div className="mt-4 flex justify-end items-center">
         <Button
           type="submit"
           className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-24"

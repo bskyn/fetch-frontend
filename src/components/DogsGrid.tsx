@@ -10,8 +10,8 @@ const DogsGrid = ({
 }: {
   dogs: IDog[];
   isLoading: boolean;
-  favorites: string[];
-  toggleFavorite: (dogId: string) => void;
+  favorites: IDog[];
+  toggleFavorite: (dog: IDog) => void;
 }) => {
   if (isLoading) {
     return <GridSkeleton />;
@@ -23,12 +23,14 @@ const DogsGrid = ({
         <div
           key={dog.id}
           className="relative border rounded-lg border-purple-500 cursor-pointer transition-transform duration-200 hover:scale-95 hover:shadow-lg"
-          onClick={() => toggleFavorite(dog.id)}
+          onClick={() => toggleFavorite(dog)}
         >
           <div className="absolute top-3 right-3 z-50">
             <FaStar
-              className={`h-7 w-7  ${
-                favorites.includes(dog.id) ? 'text-purple-600' : 'text-gray-400'
+              className={`h-7 w-7 ${
+                favorites.some((favorite) => favorite.id === dog.id)
+                  ? 'text-purple-600'
+                  : 'text-gray-400'
               }`}
             />
           </div>
@@ -39,7 +41,7 @@ const DogsGrid = ({
               className="w-full h-full object-cover object-top"
             />
           </div>
-          <div className="flex flex-col p-2">
+          <div className="flex flex-col p-2 text-slate-400">
             <div className="text-lg font-bold mt-2">{dog.name}</div>
             <p className="text-sm">Breed: {dog.breed}</p>
             <p className="text-sm">Age: {dog.age}</p>

@@ -4,12 +4,12 @@ import Pagination from '@/components/Pagination';
 import SearchBar from '@/components/SearchBar';
 import useFetchDogs from '@/hooks/useFetchDogs';
 import useSearchDogs from '@/hooks/useSearchDogs';
-import { ISearchParams, ISort } from '@/interfaces';
+import { IDog, ISearchParams, ISort } from '@/interfaces';
 import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
-import MatchDogs from '@/components/MatchDogs';
 import useMatch from '@/hooks/useMatchDogs';
 import Modal from '@/components/Modal';
+import FavoriteSelection from '@/components/FavoriteSelection';
 
 const DEFAULT_SIZE = 25;
 
@@ -18,7 +18,7 @@ const Home = () => {
   const [dogIds, setDogIds] = useState<string[]>([]);
   const [page, setPage] = useState(1);
 
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<IDog[]>([]);
   const [match, setMatch] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,6 +42,8 @@ const Home = () => {
 
   const { mutate: matchDogs, isPending: isMatchLoading } = useMatch();
 
+  console.log('dogs: ', dogs);
+
   const handleSearch = (params: {
     breed: string[];
     zipCode: string[];
@@ -60,18 +62,20 @@ const Home = () => {
     setPage(1);
   };
 
-  const toggleFavorite = (dogId: string) => {
+  const toggleFavorite = (dog: IDog) => {
     setFavorites((prevFavorites) => {
-      if (prevFavorites.includes(dogId)) {
-        return prevFavorites.filter((id) => id !== dogId);
+      if (prevFavorites.some((favorite) => favorite.id === dog.id)) {
+        return prevFavorites.filter((favorite) => favorite.id !== dog.id);
       } else {
-        return [...prevFavorites, dogId];
+        return [...prevFavorites, dog];
       }
     });
   };
 
   const handleGenerateMatch = () => {
-    matchDogs(favorites, {
+    const selectedFavoritesId = favorites.map((favorite) => favorite.id);
+
+    matchDogs(selectedFavoritesId, {
       onSuccess: (data) => {
         setMatch(data.match);
         setIsModalOpen(true);
@@ -95,15 +99,18 @@ const Home = () => {
   return (
     <div className="p-6">
       <Header />
-      <SearchBar onSearch={handleSearch} />
-      {isDogsLoading && <GridSkeleton />}
 
-      <MatchDogs
-        favorites={favorites}
-        handleGenerateMatch={handleGenerateMatch}
-        isMatchLoading={isMatchLoading}
-        clearFavorites={clearFavorites}
-      />
+      <div className="flex gap-x-4">
+        <SearchBar onSearch={handleSearch} />
+        <FavoriteSelection
+          favorites={favorites}
+          clearFavorites={clearFavorites}
+          handleGenerateMatch={handleGenerateMatch}
+          isMatchLoading={isMatchLoading}
+        />
+      </div>
+
+      {isDogsLoading && <GridSkeleton />}
 
       {dogs && dogs?.length > 0 && (
         <>
