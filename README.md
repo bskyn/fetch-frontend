@@ -9,7 +9,7 @@ To run the app:
 
 Completed using Vite+React/TS.
 
-For the app architecture, I chose to use react-query with axios as the client fetching library as its declarative with simple api's for the consumer to use. It also provides out of the box caching with loading and error handling.
+For the app architecture, I chose to use react-query with axios as the client fetching library as its declarative with simple api's for the consumer to use. It also provides out of the box caching with loading and error handling. For all of the requests, I've built a custom hook each for ease of re-use and maintainability.
 
 For the base-component library with styling, I went ahead and chose shad-cn with tailwind as my styling library. Shad-cn is builds ontop of radix and provides great component api's that are light-weight and very customizable for the consumer. I also like tailwind because it gives you ready-to-use utility classes for quick styling and development. It's also incredibly performant and lightweight.
 
