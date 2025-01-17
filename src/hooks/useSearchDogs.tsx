@@ -1,14 +1,7 @@
 import { apiClient } from '@/utils/api.client';
 import { useQuery } from '@tanstack/react-query';
 import { DOG_SEARCH_URL } from '@/constants/api.constants';
-import { ISearchParams } from '@/interfaces';
-
-interface ISearchDogsResponse {
-  resultIds: string[];
-  total: number;
-  next?: string;
-  prev?: string;
-}
+import { ISearchDogsResponse, ISearchParams } from '@/interfaces';
 
 const searchDogs = async (
   params: ISearchParams | null

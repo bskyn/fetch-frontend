@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { MultipleSelector } from '@/components/ui/multipleSelector';
@@ -39,7 +40,7 @@ const SearchBar = ({
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<SearchFormValues>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -56,12 +57,21 @@ const SearchBar = ({
       ? data.zipCode.split(',').map((zip) => zip.trim())
       : [];
 
-    onSearch({
-      breed: data.breed || [],
-      zipCode: zipCodes,
-      ageMin: data.ageMin || '',
-      ageMax: data.ageMax || '',
-      sort: data.sort,
+    // slight delay to show loading animation for better ux
+    return new Promise((resolve) => {
+      setTimeout(
+        () =>
+          resolve(
+            onSearch({
+              breed: data.breed || [],
+              zipCode: zipCodes,
+              ageMin: data.ageMin || '',
+              ageMax: data.ageMax || '',
+              sort: data.sort,
+            })
+          ),
+        100
+      );
     });
   };
 
@@ -196,10 +206,17 @@ const SearchBar = ({
       <div className="mt-4 flex justify-end">
         <Button
           type="submit"
-          className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-24"
           variant="secondary"
+          disabled={isSubmitting}
         >
-          Search
+          {isSubmitting ? (
+            <div>
+              <Loader2 className="animate-spin" />
+            </div>
+          ) : (
+            'Search'
+          )}
         </Button>
       </div>
     </form>

@@ -82,6 +82,10 @@ const Home = () => {
     });
   };
 
+  const clearFavorites = () => {
+    setFavorites([]);
+  };
+
   useEffect(() => {
     if (searchData?.resultIds) {
       setDogIds(searchData.resultIds);
@@ -98,25 +102,27 @@ const Home = () => {
         favorites={favorites}
         handleGenerateMatch={handleGenerateMatch}
         isMatchLoading={isMatchLoading}
+        clearFavorites={clearFavorites}
       />
 
-      {dogs && (
-        <DogsGrid
-          dogs={dogs}
-          isLoading={isFetchingSearch}
-          favorites={favorites}
-          toggleFavorite={toggleFavorite}
-        />
+      {dogs && dogs?.length > 0 && (
+        <>
+          <DogsGrid
+            dogs={dogs}
+            isLoading={isFetchingSearch}
+            favorites={favorites}
+            toggleFavorite={toggleFavorite}
+          />
+          <Pagination
+            page={page}
+            size={DEFAULT_SIZE}
+            searchData={searchData}
+            setPage={setPage}
+            isLoading={isDogsFetching}
+          />
+        </>
       )}
-      {dogs && (
-        <Pagination
-          page={page}
-          size={DEFAULT_SIZE}
-          searchData={searchData}
-          setPage={setPage}
-          isLoading={isDogsFetching}
-        />
-      )}
+
       <Modal
         isModalOpen={isModalOpen}
         match={match}

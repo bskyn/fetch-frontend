@@ -37,3 +37,10 @@ export interface ISearchParams {
   from?: number;
   size?: number;
 }
+
+export interface ISearchDogsResponse {
+  resultIds: string[];
+  total: number;
+  next?: string;
+  prev?: string;
+}
