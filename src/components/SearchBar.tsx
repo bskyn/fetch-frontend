@@ -78,7 +78,7 @@ const SearchBar = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="border rounded-lg p-4 shadow-md border-slate-500"
+      className="border-2 rounded-lg p-4 shadow-md border-slate-400"
     >
       <div className="text-lg font-semibold mb-4">
         ⭐ Find for your fav doggo! ⭐
