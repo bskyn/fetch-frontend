@@ -22,8 +22,6 @@ const Modal = ({
     enabled: !!match,
   });
 
-  console.log('data', data);
-
   if (isLoading) {
     return <GridSkeleton />;
   }
