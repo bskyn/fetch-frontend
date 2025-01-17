@@ -70,7 +70,9 @@ const SearchBar = ({
       onSubmit={handleSubmit(onSubmit)}
       className="border rounded-lg p-4 shadow-md border-slate-500"
     >
-      <div className="text-lg font-semibold mb-4">Search for your dogs!</div>
+      <div className="text-lg font-semibold mb-4">
+        ⭐ Find for your fav doggo! ⭐
+      </div>
 
       <div className="flex-1 mb-4">
         <label className="block text-sm font-medium mb-1">Breeds</label>

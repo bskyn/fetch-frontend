@@ -6,7 +6,10 @@ import useFetchDogs from '@/hooks/useFetchDogs';
 import useSearchDogs from '@/hooks/useSearchDogs';
 import { ISearchParams, ISort } from '@/interfaces';
 import { useEffect, useState } from 'react';
-import Header from './Header';
+import Header from '@/components/Header';
+import MatchDogs from '@/components/MatchDog';
+import useMatch from '@/hooks/useMatchDogs';
+import Modal from '@/components/Modal';
 
 const DEFAULT_SIZE = 25;
 
@@ -14,6 +17,10 @@ const Home = () => {
   const [searchParams, setSearchParams] = useState<ISearchParams | null>(null);
   const [dogIds, setDogIds] = useState<string[]>([]);
   const [page, setPage] = useState(1);
+
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [match, setMatch] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: searchData, isFetching: isFetchingSearch } = useSearchDogs({
     params: {
@@ -33,6 +40,8 @@ const Home = () => {
     enabled: !!dogIds.length,
   });
 
+  const { mutate: matchDogs, isPending: isMatchLoading } = useMatch();
+
   const handleSearch = (params: {
     breed: string[];
     zipCode: string[];
@@ -51,6 +60,28 @@ const Home = () => {
     setPage(1);
   };
 
+  const toggleFavorite = (dogId: string) => {
+    setFavorites((prevFavorites) => {
+      if (prevFavorites.includes(dogId)) {
+        return prevFavorites.filter((id) => id !== dogId);
+      } else {
+        return [...prevFavorites, dogId];
+      }
+    });
+  };
+
+  const handleGenerateMatch = () => {
+    matchDogs(favorites, {
+      onSuccess: (data) => {
+        setMatch(data.match);
+        setIsModalOpen(true);
+      },
+      onError: (error) => {
+        console.error('Error generating match:', error);
+      },
+    });
+  };
+
   useEffect(() => {
     if (searchData?.resultIds) {
       setDogIds(searchData.resultIds);
@@ -62,7 +93,21 @@ const Home = () => {
       <Header />
       <SearchBar onSearch={handleSearch} />
       {isDogsLoading && <GridSkeleton />}
-      {dogs && <DogsGrid dogs={dogs} isLoading={isFetchingSearch} />}
+
+      <MatchDogs
+        favorites={favorites}
+        handleGenerateMatch={handleGenerateMatch}
+        isMatchLoading={isMatchLoading}
+      />
+
+      {dogs && (
+        <DogsGrid
+          dogs={dogs}
+          isLoading={isFetchingSearch}
+          favorites={favorites}
+          toggleFavorite={toggleFavorite}
+        />
+      )}
       {dogs && (
         <Pagination
           page={page}
@@ -72,6 +117,11 @@ const Home = () => {
           isLoading={isDogsFetching}
         />
       )}
+      <Modal
+        isModalOpen={isModalOpen}
+        match={match}
+        setIsModalOpen={setIsModalOpen}
+      />
     </div>
   );
 };

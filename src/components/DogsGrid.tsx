@@ -1,12 +1,17 @@
 import { IDog } from '@/interfaces';
+import { FaStar } from 'react-icons/fa';
 import GridSkeleton from './GridSkeleton';
 
 const DogsGrid = ({
   dogs,
   isLoading,
+  favorites,
+  toggleFavorite,
 }: {
   dogs: IDog[];
   isLoading: boolean;
+  favorites: string[];
+  toggleFavorite: (dogId: string) => void;
 }) => {
   if (isLoading) {
     return <GridSkeleton />;
@@ -17,8 +22,16 @@ const DogsGrid = ({
       {dogs.map((dog) => (
         <div
           key={dog.id}
-          className="border rounded-lg p-2 shadow-lg border-slate-500 cursor-pointer transition-transform duration-200 hover:scale-95 hover:shadow-lg"
+          className="relative border rounded-lg p-2 border-slate-500 cursor-pointer transition-transform duration-200 hover:scale-95 hover:shadow-lg"
+          onClick={() => toggleFavorite(dog.id)}
         >
+          <div className="absolute top-3 right-3 z-50">
+            <FaStar
+              className={`h-7 w-7  ${
+                favorites.includes(dog.id) ? 'text-purple-600' : 'text-gray-400'
+              }`}
+            />
+          </div>
           <div className="w-full aspect-w-4 aspect-h-3 rounded-md overflow-hidden">
             <img
               src={dog.img}
