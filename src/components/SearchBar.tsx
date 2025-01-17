@@ -92,7 +92,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
           render={({ field }) => (
             <MultipleSelector
               options={options}
-              placeholder="Select breeds"
+              placeholder="Select breeds (optional)"
               onChange={(val) =>
                 field.onChange(val.map((breed) => breed.value))
               }
