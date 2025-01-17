@@ -11,7 +11,7 @@ Please note do not test in your broweser incognito mode as that prevents cookies
 
 ## Documentation
 
-Deployed site link: [https://fetch-frontend-topaz.vercel.app](https://fetch-frontend-topaz.vercel.app/)
+Deployed site link: [https://fetch-frontend.pages.dev/](https://fetch-frontend.pages.dev/)
 
 Completed using Vite+React/TS.
 
