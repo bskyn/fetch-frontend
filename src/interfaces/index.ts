@@ -1,3 +1,5 @@
+import { SortDirection, SortField } from '@/enum';
+
 export interface IDog {
   id: string;
   img: string;
@@ -19,4 +21,19 @@ export interface ILocation {
 export interface ICoordinates {
   lat: number;
   lon: number;
+}
+
+export interface ISort {
+  field: SortField;
+  direction: SortDirection;
+}
+
+export interface ISearchParams {
+  breeds?: string[];
+  zipCodes?: string[];
+  ageMin?: number;
+  ageMax?: number;
+  sort?: string;
+  from?: number;
+  size?: number;
 }

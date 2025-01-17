@@ -17,12 +17,14 @@ import useAuth from '@/hooks/useAuth';
 import useLogin from '@/hooks/useLogin';
 import { HOME_ROUTE } from '@/constants/app.routes';
 
+type LoginFormValues = z.infer<typeof loginFormSchema>;
+
 const Login = () => {
   const navigate = useNavigate();
   const { login: setAuthenticated } = useAuth();
   const { mutate: login, isPending } = useLogin();
 
-  const form = useForm<z.infer<typeof loginFormSchema>>({
+  const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       name: '',
@@ -30,7 +32,7 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof loginFormSchema>) => {
+  const onSubmit = (data: LoginFormValues) => {
     login(data, {
       onSuccess: () => {
         setAuthenticated();

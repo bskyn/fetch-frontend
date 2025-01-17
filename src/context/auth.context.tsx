@@ -50,7 +50,7 @@ export const AuthProvider = () => {
   }, [checkAuthenticated]);
 
   if (isLoading) {
-    <div />;
+    return <div />;
   }
 
   return (
