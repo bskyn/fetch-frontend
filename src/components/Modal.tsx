@@ -34,7 +34,7 @@ const Modal = ({
         <DialogHeader>
           <DialogTitle className="mb-2">
             <p className="bg-gradient-to-r from-pink-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
-              ⭐ Your Match 🚀
+              Your Match ⭐
             </p>
           </DialogTitle>
           <DialogDescription>
