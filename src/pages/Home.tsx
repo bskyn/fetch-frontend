@@ -7,7 +7,7 @@ import useSearchDogs from '@/hooks/useSearchDogs';
 import { ISearchParams, ISort } from '@/interfaces';
 import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
-import MatchDogs from '@/components/MatchDog';
+import MatchDogs from '@/components/MatchDogs';
 import useMatch from '@/hooks/useMatchDogs';
 import Modal from '@/components/Modal';
 

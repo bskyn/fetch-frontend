@@ -48,9 +48,9 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-md p-6 bg-gray-700 rounded-lg shadow-lg">
+      <div className="w-full max-w-md p-6 bg-slate-700 rounded-lg shadow-lg border border-slate-400">
         <h1 className="text-2xl font-bold text-center text-white mb-6">
-          Login to Fetch
+          Login to Fetch Match
         </h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
