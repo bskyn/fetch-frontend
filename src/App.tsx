@@ -21,7 +21,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <div className="max-w-[1440px] mx-auto">
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
 export default App;
