@@ -41,8 +41,6 @@ const Home = () => {
 
   const { mutate: matchDogs, isPending: isMatchLoading } = useMatch();
 
-  console.log('dogs: ', dogs);
-
   const handleSearch = (params: {
     breed: string[];
     zipCode: string[];

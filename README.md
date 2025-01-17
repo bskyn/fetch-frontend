@@ -11,6 +11,8 @@ Please note do not test in your broweser incognito mode as that prevents cookies
 
 ## Documentation
 
+Deployed site link: [https://fetch-frontend-topaz.vercel.app](https://fetch-frontend-topaz.vercel.app/)
+
 Completed using Vite+React/TS.
 
 For the app architecture, I chose to use react-query with axios as the client fetching library as its declarative with simple api's for the consumer to use. It also provides out of the box caching with loading and error handling. For all of the requests, I've built a custom hook each for ease of re-use and maintainability.
