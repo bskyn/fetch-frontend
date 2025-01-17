@@ -5,6 +5,10 @@
 To run the app:
 `npm install && npm run dev`
 
+## Note
+
+Please note do not test in your broweser incognito mode as that prevents cookies stored on the browser and the authenticated endpoint api calls will fail.
+
 ## Documentation
 
 Completed using Vite+React/TS.
